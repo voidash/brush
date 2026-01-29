@@ -10,12 +10,12 @@ import (
 	"charm.land/bubbles/v2/textinput"
 	tea "charm.land/bubbletea/v2"
 	"github.com/charmbracelet/catwalk/pkg/catwalk"
-	"github.com/charmbracelet/crush/internal/agent/hyper"
-	"github.com/charmbracelet/crush/internal/commands"
-	"github.com/charmbracelet/crush/internal/config"
-	"github.com/charmbracelet/crush/internal/ui/common"
-	"github.com/charmbracelet/crush/internal/ui/list"
-	"github.com/charmbracelet/crush/internal/ui/styles"
+	"github.com/charmbracelet/brush/internal/agent/hyper"
+	"github.com/charmbracelet/brush/internal/commands"
+	"github.com/charmbracelet/brush/internal/config"
+	"github.com/charmbracelet/brush/internal/ui/common"
+	"github.com/charmbracelet/brush/internal/ui/list"
+	"github.com/charmbracelet/brush/internal/ui/styles"
 	uv "github.com/charmbracelet/ultraviolet"
 )
 

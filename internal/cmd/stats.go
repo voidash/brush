@@ -14,8 +14,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/charmbracelet/crush/internal/config"
-	"github.com/charmbracelet/crush/internal/db"
+	"github.com/charmbracelet/brush/internal/config"
+	"github.com/charmbracelet/brush/internal/db"
 	"github.com/pkg/browser"
 	"github.com/spf13/cobra"
 )

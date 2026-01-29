@@ -9,11 +9,11 @@ import (
 	tea "charm.land/bubbletea/v2"
 	"charm.land/lipgloss/v2"
 
-	"github.com/charmbracelet/crush/internal/agent"
-	"github.com/charmbracelet/crush/internal/config"
-	"github.com/charmbracelet/crush/internal/home"
-	"github.com/charmbracelet/crush/internal/ui/common"
-	"github.com/charmbracelet/crush/internal/uiutil"
+	"github.com/charmbracelet/brush/internal/agent"
+	"github.com/charmbracelet/brush/internal/config"
+	"github.com/charmbracelet/brush/internal/home"
+	"github.com/charmbracelet/brush/internal/ui/common"
+	"github.com/charmbracelet/brush/internal/uiutil"
 )
 
 // markProjectInitialized marks the current project as initialized in the config.
@@ -53,7 +53,7 @@ func (m *UI) initializeProject() tea.Cmd {
 	var cmds []tea.Cmd
 
 	initialize := func() tea.Msg {
-		initPrompt, err := agent.InitializePrompt(*cfg)
+		initPrompt, err := agent.InitializePrompt(*cfg, cfg.Options.TemplatesDir)
 		if err != nil {
 			return uiutil.InfoMsg{Type: uiutil.InfoTypeError, Msg: err.Error()}
 		}

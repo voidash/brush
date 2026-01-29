@@ -9,9 +9,9 @@ import (
 	"charm.land/bubbles/v2/textinput"
 	tea "charm.land/bubbletea/v2"
 	"charm.land/lipgloss/v2"
-	"github.com/charmbracelet/crush/internal/tui/components/core/layout"
-	"github.com/charmbracelet/crush/internal/tui/styles"
-	"github.com/charmbracelet/crush/internal/tui/util"
+	"github.com/charmbracelet/brush/internal/tui/components/core/layout"
+	"github.com/charmbracelet/brush/internal/tui/styles"
+	"github.com/charmbracelet/brush/internal/tui/util"
 	"github.com/sahilm/fuzzy"
 )
 

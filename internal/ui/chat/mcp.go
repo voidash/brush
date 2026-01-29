@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/charmbracelet/crush/internal/message"
-	"github.com/charmbracelet/crush/internal/stringext"
-	"github.com/charmbracelet/crush/internal/ui/styles"
+	"github.com/charmbracelet/brush/internal/message"
+	"github.com/charmbracelet/brush/internal/stringext"
+	"github.com/charmbracelet/brush/internal/ui/styles"
 )
 
 // MCPToolMessageItem is a message item that represents a bash tool call.

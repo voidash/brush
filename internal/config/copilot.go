@@ -7,8 +7,8 @@ import (
 	"testing"
 
 	"github.com/charmbracelet/catwalk/pkg/catwalk"
-	"github.com/charmbracelet/crush/internal/oauth"
-	"github.com/charmbracelet/crush/internal/oauth/copilot"
+	"github.com/charmbracelet/brush/internal/oauth"
+	"github.com/charmbracelet/brush/internal/oauth/copilot"
 )
 
 func (c *Config) ImportCopilot() (*oauth.Token, bool) {

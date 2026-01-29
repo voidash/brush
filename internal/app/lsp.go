@@ -5,8 +5,8 @@ import (
 	"log/slog"
 	"time"
 
-	"github.com/charmbracelet/crush/internal/config"
-	"github.com/charmbracelet/crush/internal/lsp"
+	"github.com/charmbracelet/brush/internal/config"
+	"github.com/charmbracelet/brush/internal/lsp"
 )
 
 // initLSPClients initializes LSP clients.

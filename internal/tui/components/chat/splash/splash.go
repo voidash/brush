@@ -10,23 +10,23 @@ import (
 	tea "charm.land/bubbletea/v2"
 	"charm.land/lipgloss/v2"
 	"github.com/charmbracelet/catwalk/pkg/catwalk"
-	"github.com/charmbracelet/crush/internal/agent"
-	hyperp "github.com/charmbracelet/crush/internal/agent/hyper"
-	"github.com/charmbracelet/crush/internal/config"
-	"github.com/charmbracelet/crush/internal/home"
-	"github.com/charmbracelet/crush/internal/tui/components/chat"
-	"github.com/charmbracelet/crush/internal/tui/components/core"
-	"github.com/charmbracelet/crush/internal/tui/components/core/layout"
-	"github.com/charmbracelet/crush/internal/tui/components/dialogs/copilot"
-	"github.com/charmbracelet/crush/internal/tui/components/dialogs/hyper"
-	"github.com/charmbracelet/crush/internal/tui/components/dialogs/models"
-	"github.com/charmbracelet/crush/internal/tui/components/logo"
-	lspcomponent "github.com/charmbracelet/crush/internal/tui/components/lsp"
-	"github.com/charmbracelet/crush/internal/tui/components/mcp"
-	"github.com/charmbracelet/crush/internal/tui/exp/list"
-	"github.com/charmbracelet/crush/internal/tui/styles"
-	"github.com/charmbracelet/crush/internal/tui/util"
-	"github.com/charmbracelet/crush/internal/version"
+	"github.com/charmbracelet/brush/internal/agent"
+	hyperp "github.com/charmbracelet/brush/internal/agent/hyper"
+	"github.com/charmbracelet/brush/internal/config"
+	"github.com/charmbracelet/brush/internal/home"
+	"github.com/charmbracelet/brush/internal/tui/components/chat"
+	"github.com/charmbracelet/brush/internal/tui/components/core"
+	"github.com/charmbracelet/brush/internal/tui/components/core/layout"
+	"github.com/charmbracelet/brush/internal/tui/components/dialogs/copilot"
+	"github.com/charmbracelet/brush/internal/tui/components/dialogs/hyper"
+	"github.com/charmbracelet/brush/internal/tui/components/dialogs/models"
+	"github.com/charmbracelet/brush/internal/tui/components/logo"
+	lspcomponent "github.com/charmbracelet/brush/internal/tui/components/lsp"
+	"github.com/charmbracelet/brush/internal/tui/components/mcp"
+	"github.com/charmbracelet/brush/internal/tui/exp/list"
+	"github.com/charmbracelet/brush/internal/tui/styles"
+	"github.com/charmbracelet/brush/internal/tui/util"
+	"github.com/charmbracelet/brush/internal/version"
 )
 
 type Splash interface {
@@ -436,7 +436,8 @@ func (s *splashCmp) initializeProject() tea.Cmd {
 
 	cmds = append(cmds, util.CmdHandler(OnboardingCompleteMsg{}))
 	if !s.selectedNo {
-		initPrompt, err := agent.InitializePrompt(*config.Get())
+		cfg := config.Get()
+		initPrompt, err := agent.InitializePrompt(*cfg, cfg.Options.TemplatesDir)
 		if err != nil {
 			return util.ReportError(err)
 		}

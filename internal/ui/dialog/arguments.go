@@ -13,9 +13,9 @@ import (
 	"golang.org/x/text/cases"
 	"golang.org/x/text/language"
 
-	"github.com/charmbracelet/crush/internal/commands"
-	"github.com/charmbracelet/crush/internal/ui/common"
-	"github.com/charmbracelet/crush/internal/uiutil"
+	"github.com/charmbracelet/brush/internal/commands"
+	"github.com/charmbracelet/brush/internal/ui/common"
+	"github.com/charmbracelet/brush/internal/uiutil"
 	uv "github.com/charmbracelet/ultraviolet"
 )
 

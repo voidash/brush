@@ -5,9 +5,9 @@ import (
 	"strings"
 
 	"charm.land/lipgloss/v2"
-	"github.com/charmbracelet/crush/internal/session"
-	"github.com/charmbracelet/crush/internal/tui/components/chat/todos"
-	"github.com/charmbracelet/crush/internal/tui/styles"
+	"github.com/charmbracelet/brush/internal/session"
+	"github.com/charmbracelet/brush/internal/tui/components/chat/todos"
+	"github.com/charmbracelet/brush/internal/tui/styles"
 )
 
 func hasIncompleteTodos(todos []session.Todo) bool {

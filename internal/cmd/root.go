@@ -15,15 +15,15 @@ import (
 	tea "charm.land/bubbletea/v2"
 	"charm.land/lipgloss/v2"
 	"github.com/charmbracelet/colorprofile"
-	"github.com/charmbracelet/crush/internal/app"
-	"github.com/charmbracelet/crush/internal/config"
-	"github.com/charmbracelet/crush/internal/db"
-	"github.com/charmbracelet/crush/internal/event"
-	"github.com/charmbracelet/crush/internal/projects"
-	"github.com/charmbracelet/crush/internal/tui"
-	"github.com/charmbracelet/crush/internal/ui/common"
-	ui "github.com/charmbracelet/crush/internal/ui/model"
-	"github.com/charmbracelet/crush/internal/version"
+	"github.com/charmbracelet/brush/internal/app"
+	"github.com/charmbracelet/brush/internal/config"
+	"github.com/charmbracelet/brush/internal/db"
+	"github.com/charmbracelet/brush/internal/event"
+	"github.com/charmbracelet/brush/internal/projects"
+	"github.com/charmbracelet/brush/internal/tui"
+	"github.com/charmbracelet/brush/internal/ui/common"
+	ui "github.com/charmbracelet/brush/internal/ui/model"
+	"github.com/charmbracelet/brush/internal/version"
 	"github.com/charmbracelet/fang"
 	uv "github.com/charmbracelet/ultraviolet"
 	"github.com/charmbracelet/x/ansi"
@@ -40,8 +40,9 @@ func init() {
 	rootCmd.PersistentFlags().StringP("cwd", "c", "", "Current working directory")
 	rootCmd.PersistentFlags().StringP("data-dir", "D", "", "Custom crush data directory")
 	rootCmd.PersistentFlags().BoolP("debug", "d", false, "Debug")
+	rootCmd.PersistentFlags().BoolP("yolo", "y", false, "Automatically accept all permissions (dangerous mode)")
+	rootCmd.PersistentFlags().String("templates-dir", "", "Custom templates directory")
 	rootCmd.Flags().BoolP("help", "h", false, "Help")
-	rootCmd.Flags().BoolP("yolo", "y", false, "Automatically accept all permissions (dangerous mode)")
 
 	rootCmd.AddCommand(
 		runCmd,
@@ -56,30 +57,30 @@ func init() {
 }
 
 var rootCmd = &cobra.Command{
-	Use:   "crush",
+	Use:   "brush",
 	Short: "An AI assistant for software development",
 	Long:  "An AI assistant for software development and similar tasks with direct access to the terminal",
 	Example: `
 # Run in interactive mode
-crush
+brush
 
 # Run with debug logging
-crush -d
+brush -d
 
 # Run with debug logging in a specific directory
-crush -d -c /path/to/project
+brush -d -c /path/to/project
 
 # Run with custom data directory
-crush -D /path/to/custom/.crush
+brush -D /path/to/custom/.brush
 
 # Print version
-crush -v
+brush -v
 
 # Run a single non-interactive prompt
-crush run "Explain the use of context in Go"
+brush run "Explain the use of context in Go"
 
 # Run in dangerous mode (auto-accept all permissions)
-crush -y
+brush -y
   `,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		app, err := setupAppWithProgressBar(cmd)
@@ -115,7 +116,7 @@ crush -y
 		if _, err := program.Run(); err != nil {
 			event.Error(err)
 			slog.Error("TUI run error", "error", err)
-			return errors.New("Crush crashed. If metrics are enabled, we were notified about it. If you'd like to report it, please copy the stacktrace above and open an issue at https://github.com/charmbracelet/crush/issues/new?template=bug.yml") //nolint:staticcheck
+			return errors.New("Crush crashed. If metrics are enabled, we were notified about it. If you'd like to report it, please copy the stacktrace above and open an issue at https://github.com/charmbracelet/brush/issues/new?template=bug.yml") //nolint:staticcheck
 		}
 		return nil
 	},
@@ -194,6 +195,7 @@ func setupApp(cmd *cobra.Command) (*app.App, error) {
 	debug, _ := cmd.Flags().GetBool("debug")
 	yolo, _ := cmd.Flags().GetBool("yolo")
 	dataDir, _ := cmd.Flags().GetString("data-dir")
+	templatesDir, _ := cmd.Flags().GetString("templates-dir")
 	ctx := cmd.Context()
 
 	cwd, err := ResolveCwd(cmd)
@@ -210,6 +212,18 @@ func setupApp(cmd *cobra.Command) (*app.App, error) {
 		cfg.Permissions = &config.Permissions{}
 	}
 	cfg.Permissions.SkipRequests = yolo
+
+	// Apply custom templates directory from CLI flag
+	if templatesDir != "" {
+		cfg.Options.TemplatesDir = templatesDir
+	}
+
+	// Save yolo mode to config for persistence
+	if yolo {
+		if err := cfg.SetConfigField("permissions.skip_requests", true); err != nil {
+			slog.Warn("Failed to save yolo mode to config", "error", err)
+		}
+	}
 
 	if err := createDotCrushDir(cfg.Options.DataDirectory); err != nil {
 		return nil, err

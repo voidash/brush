@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/charmbracelet/catwalk/pkg/catwalk"
-	"github.com/charmbracelet/crush/internal/config"
+	"github.com/charmbracelet/brush/internal/config"
 	"github.com/stretchr/testify/require"
 )
 

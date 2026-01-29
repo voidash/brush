@@ -5,13 +5,13 @@ import (
 	"strings"
 
 	"charm.land/lipgloss/v2"
-	"github.com/charmbracelet/crush/internal/config"
-	"github.com/charmbracelet/crush/internal/csync"
-	"github.com/charmbracelet/crush/internal/fsext"
-	"github.com/charmbracelet/crush/internal/lsp"
-	"github.com/charmbracelet/crush/internal/session"
-	"github.com/charmbracelet/crush/internal/ui/common"
-	"github.com/charmbracelet/crush/internal/ui/styles"
+	"github.com/charmbracelet/brush/internal/config"
+	"github.com/charmbracelet/brush/internal/csync"
+	"github.com/charmbracelet/brush/internal/fsext"
+	"github.com/charmbracelet/brush/internal/lsp"
+	"github.com/charmbracelet/brush/internal/session"
+	"github.com/charmbracelet/brush/internal/ui/common"
+	"github.com/charmbracelet/brush/internal/ui/styles"
 	"github.com/charmbracelet/x/ansi"
 )
 
@@ -38,9 +38,9 @@ func renderCompactHeader(
 
 	var b strings.Builder
 
-	b.WriteString(t.Header.Charm.Render("Charm™"))
+	b.WriteString(t.Header.Charm.Render("funky"))
 	b.WriteString(" ")
-	b.WriteString(styles.ApplyBoldForegroundGrad(t, "CRUSH", t.Secondary, t.Primary))
+	b.WriteString(styles.ApplyBoldForegroundGrad(t, "BRUSH", t.Secondary, t.Primary))
 	b.WriteString(" ")
 
 	availDetailWidth := width - leftPadding - rightPadding - lipgloss.Width(b.String()) - minHeaderDiags

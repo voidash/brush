@@ -9,13 +9,13 @@ import (
 	tea "charm.land/bubbletea/v2"
 	"charm.land/lipgloss/v2"
 	"github.com/charmbracelet/catwalk/pkg/catwalk"
-	"github.com/charmbracelet/crush/internal/config"
-	"github.com/charmbracelet/crush/internal/message"
-	"github.com/charmbracelet/crush/internal/ui/anim"
-	"github.com/charmbracelet/crush/internal/ui/attachments"
-	"github.com/charmbracelet/crush/internal/ui/common"
-	"github.com/charmbracelet/crush/internal/ui/list"
-	"github.com/charmbracelet/crush/internal/ui/styles"
+	"github.com/charmbracelet/brush/internal/config"
+	"github.com/charmbracelet/brush/internal/message"
+	"github.com/charmbracelet/brush/internal/ui/anim"
+	"github.com/charmbracelet/brush/internal/ui/attachments"
+	"github.com/charmbracelet/brush/internal/ui/common"
+	"github.com/charmbracelet/brush/internal/ui/list"
+	"github.com/charmbracelet/brush/internal/ui/styles"
 )
 
 // this is the total width that is taken up by the border + padding

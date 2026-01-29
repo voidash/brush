@@ -12,19 +12,19 @@ import (
 	"charm.land/lipgloss/v2"
 	"github.com/charmbracelet/catwalk/pkg/catwalk"
 
-	"github.com/charmbracelet/crush/internal/agent"
-	"github.com/charmbracelet/crush/internal/agent/hyper"
-	"github.com/charmbracelet/crush/internal/agent/tools/mcp"
-	"github.com/charmbracelet/crush/internal/config"
-	"github.com/charmbracelet/crush/internal/csync"
-	"github.com/charmbracelet/crush/internal/pubsub"
-	"github.com/charmbracelet/crush/internal/tui/components/chat"
-	"github.com/charmbracelet/crush/internal/tui/components/core"
-	"github.com/charmbracelet/crush/internal/tui/components/dialogs"
-	"github.com/charmbracelet/crush/internal/tui/exp/list"
-	"github.com/charmbracelet/crush/internal/tui/styles"
-	"github.com/charmbracelet/crush/internal/tui/util"
-	"github.com/charmbracelet/crush/internal/uicmd"
+	"github.com/charmbracelet/brush/internal/agent"
+	"github.com/charmbracelet/brush/internal/agent/hyper"
+	"github.com/charmbracelet/brush/internal/agent/tools/mcp"
+	"github.com/charmbracelet/brush/internal/config"
+	"github.com/charmbracelet/brush/internal/csync"
+	"github.com/charmbracelet/brush/internal/pubsub"
+	"github.com/charmbracelet/brush/internal/tui/components/chat"
+	"github.com/charmbracelet/brush/internal/tui/components/core"
+	"github.com/charmbracelet/brush/internal/tui/components/dialogs"
+	"github.com/charmbracelet/brush/internal/tui/exp/list"
+	"github.com/charmbracelet/brush/internal/tui/styles"
+	"github.com/charmbracelet/brush/internal/tui/util"
+	"github.com/charmbracelet/brush/internal/uicmd"
 )
 
 const (
@@ -455,7 +455,7 @@ func (c *commandDialogCmp) defaultCommands() []Command {
 			Title:       "Initialize Project",
 			Description: fmt.Sprintf("Create/Update the %s memory file", config.Get().Options.InitializeAs),
 			Handler: func(cmd Command) tea.Cmd {
-				initPrompt, err := agent.InitializePrompt(*config.Get())
+				initPrompt, err := agent.InitializePrompt(*config.Get(), config.Get().Options.TemplatesDir)
 				if err != nil {
 					return util.ReportError(err)
 				}

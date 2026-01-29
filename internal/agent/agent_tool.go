@@ -8,9 +8,9 @@ import (
 
 	"charm.land/fantasy"
 
-	"github.com/charmbracelet/crush/internal/agent/prompt"
-	"github.com/charmbracelet/crush/internal/agent/tools"
-	"github.com/charmbracelet/crush/internal/config"
+	"github.com/charmbracelet/brush/internal/agent/prompt"
+	"github.com/charmbracelet/brush/internal/agent/tools"
+	"github.com/charmbracelet/brush/internal/config"
 )
 
 //go:embed templates/agent_tool.md
@@ -29,7 +29,7 @@ func (c *coordinator) agentTool(ctx context.Context) (fantasy.AgentTool, error) 
 	if !ok {
 		return nil, errors.New("task agent not configured")
 	}
-	prompt, err := taskPrompt(prompt.WithWorkingDir(c.cfg.WorkingDir()))
+	prompt, err := taskPrompt(c.cfg.Options.TemplatesDir, prompt.WithWorkingDir(c.cfg.WorkingDir()))
 	if err != nil {
 		return nil, err
 	}

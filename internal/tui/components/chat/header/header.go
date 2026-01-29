@@ -6,14 +6,14 @@ import (
 
 	tea "charm.land/bubbletea/v2"
 	"charm.land/lipgloss/v2"
-	"github.com/charmbracelet/crush/internal/config"
-	"github.com/charmbracelet/crush/internal/csync"
-	"github.com/charmbracelet/crush/internal/fsext"
-	"github.com/charmbracelet/crush/internal/lsp"
-	"github.com/charmbracelet/crush/internal/pubsub"
-	"github.com/charmbracelet/crush/internal/session"
-	"github.com/charmbracelet/crush/internal/tui/styles"
-	"github.com/charmbracelet/crush/internal/tui/util"
+	"github.com/charmbracelet/brush/internal/config"
+	"github.com/charmbracelet/brush/internal/csync"
+	"github.com/charmbracelet/brush/internal/fsext"
+	"github.com/charmbracelet/brush/internal/lsp"
+	"github.com/charmbracelet/brush/internal/pubsub"
+	"github.com/charmbracelet/brush/internal/session"
+	"github.com/charmbracelet/brush/internal/tui/styles"
+	"github.com/charmbracelet/brush/internal/tui/util"
 	"github.com/charmbracelet/x/ansi"
 )
 
@@ -72,9 +72,9 @@ func (h *header) View() string {
 
 	var b strings.Builder
 
-	b.WriteString(t.S().Base.Foreground(t.Secondary).Render("Charm™"))
+	b.WriteString(t.S().Base.Foreground(t.Secondary).Render("funky"))
 	b.WriteString(gap)
-	b.WriteString(styles.ApplyBoldForegroundGrad("CRUSH", t.Secondary, t.Primary))
+	b.WriteString(styles.ApplyBoldForegroundGrad("BRUSH", t.Secondary, t.Primary))
 	b.WriteString(gap)
 
 	availDetailWidth := h.width - leftPadding - rightPadding - lipgloss.Width(b.String()) - minDiags

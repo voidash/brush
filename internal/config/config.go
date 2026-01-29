@@ -15,20 +15,20 @@ import (
 	"time"
 
 	"github.com/charmbracelet/catwalk/pkg/catwalk"
-	hyperp "github.com/charmbracelet/crush/internal/agent/hyper"
-	"github.com/charmbracelet/crush/internal/csync"
-	"github.com/charmbracelet/crush/internal/env"
-	"github.com/charmbracelet/crush/internal/oauth"
-	"github.com/charmbracelet/crush/internal/oauth/copilot"
-	"github.com/charmbracelet/crush/internal/oauth/hyper"
+	hyperp "github.com/charmbracelet/brush/internal/agent/hyper"
+	"github.com/charmbracelet/brush/internal/csync"
+	"github.com/charmbracelet/brush/internal/env"
+	"github.com/charmbracelet/brush/internal/oauth"
+	"github.com/charmbracelet/brush/internal/oauth/copilot"
+	"github.com/charmbracelet/brush/internal/oauth/hyper"
 	"github.com/invopop/jsonschema"
 	"github.com/tidwall/gjson"
 	"github.com/tidwall/sjson"
 )
 
 const (
-	appName              = "crush"
-	defaultDataDirectory = ".crush"
+	appName              = "brush"
+	defaultDataDirectory = ".brush"
 	defaultInitializeAs  = "AGENTS.md"
 )
 
@@ -40,12 +40,12 @@ var defaultContextPaths = []string{
 	"CLAUDE.local.md",
 	"GEMINI.md",
 	"gemini.md",
-	"crush.md",
-	"crush.local.md",
-	"Crush.md",
-	"Crush.local.md",
-	"CRUSH.md",
-	"CRUSH.local.md",
+	"brush.md",
+	"brush.local.md",
+	"Brush.md",
+	"Brush.local.md",
+	"BRUSH.md",
+	"BRUSH.local.md",
 	"AGENTS.md",
 	"agents.md",
 	"Agents.md",
@@ -257,6 +257,7 @@ type Options struct {
 	Attribution               *Attribution `json:"attribution,omitempty" jsonschema:"description=Attribution settings for generated content"`
 	DisableMetrics            bool         `json:"disable_metrics,omitempty" jsonschema:"description=Disable sending metrics,default=false"`
 	InitializeAs              string       `json:"initialize_as,omitempty" jsonschema:"description=Name of the context file to create/update during project initialization,default=AGENTS.md,example=AGENTS.md,example=CRUSH.md,example=CLAUDE.md,example=docs/LLMs.md"`
+	TemplatesDir              string       `json:"templates_dir,omitempty" jsonschema:"description=Path to directory containing custom prompt templates (coder.md.tpl, task.md.tpl, initialize.md.tpl),example=~/.config/brush/templates"`
 }
 
 type MCPs map[string]MCPConfig
@@ -358,7 +359,7 @@ func (t ToolLs) Limits() (depth, items int) {
 	return ptrValOr(t.MaxDepth, 0), ptrValOr(t.MaxItems, 0)
 }
 
-// Config holds the configuration for crush.
+// Config holds the configuration for brush.
 type Config struct {
 	Schema string `json:"$schema,omitempty"`
 

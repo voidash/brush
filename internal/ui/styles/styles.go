@@ -11,7 +11,7 @@ import (
 	"charm.land/glamour/v2/ansi"
 	"charm.land/lipgloss/v2"
 	"github.com/alecthomas/chroma/v2"
-	"github.com/charmbracelet/crush/internal/tui/exp/diffview"
+	"github.com/charmbracelet/brush/internal/tui/exp/diffview"
 	"github.com/charmbracelet/x/exp/charmtone"
 )
 
@@ -71,7 +71,7 @@ type Styles struct {
 
 	// Header
 	Header struct {
-		Charm        lipgloss.Style // Style for "Charm™" label
+		Charm        lipgloss.Style // Style for "funky" label
 		Diagonals    lipgloss.Style // Style for diagonal separators (╱)
 		Percentage   lipgloss.Style // Style for context percentage
 		Keystroke    lipgloss.Style // Style for keystroke hints (e.g., "ctrl+d")
