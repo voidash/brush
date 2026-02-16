@@ -1,18 +1,33 @@
 name: Release Binaries
 
 on:
-  push:
-    branches: [main]
-    tags:
-      - 'v*'
-  pull_request:
-    branches: [main]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version tag (e.g., v1.0.0)'
+        required: true
+        type: string
 
 permissions:
   contents: write
 
 jobs:
+  tag:
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ inputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create and push tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -a "${{ inputs.version }}" -m "Release ${{ inputs.version }}"
+          git push origin "${{ inputs.version }}"
+
   build:
+    needs: tag
     strategy:
       matrix:
         include:
@@ -40,6 +55,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.version }}
 
       - uses: actions/setup-go@v5
         with:
@@ -50,7 +67,7 @@ jobs:
           GOOS: ${{ matrix.goos }}
           GOARCH: ${{ matrix.goarch }}
           CGO_ENABLED: 0
-        run: go build -ldflags="-s -w" -o ${{ matrix.binary }} .
+        run: go build -ldflags="-s -w -X main.Version=${{ inputs.version }}" -o ${{ matrix.binary }} .
 
       - name: Create archive (unix)
         if: matrix.goos != 'windows'
@@ -77,8 +94,7 @@ jobs:
           path: brush-${{ matrix.goos }}-${{ matrix.goarch }}.zip
 
   release:
-    needs: build
-    if: startsWith(github.ref, 'refs/tags/')
+    needs: [tag, build]
     runs-on: ubuntu-latest
     steps:
       - name: Download all artifacts
@@ -94,5 +110,6 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ inputs.version }}
           files: release/*
           generate_release_notes: true
