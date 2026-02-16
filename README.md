@@ -5,13 +5,13 @@ AI coding assistant for the terminal. Fork of [Charm's Crush](https://github.com
 ## Install
 
 ```bash
-curl -fsSL https://ash9.dev/brush/install.sh | bash
+curl -fsSL https://ash9.dev/install.sh | bash
 ```
 
 Or specify install directory:
 
 ```bash
-curl -fsSL https://ash9.dev/brush/install.sh | INSTALL_DIR=/usr/local/bin bash
+curl -fsSL https://ash9.dev/install.sh | INSTALL_DIR=/usr/local/bin bash
 ```
 
 ### Manual Download
