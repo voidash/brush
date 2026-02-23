@@ -17,7 +17,7 @@ jobs:
     outputs:
       tag: ${{ inputs.version }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Create and push tag
         run: |
@@ -54,11 +54,11 @@ jobs:
 
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           ref: ${{ inputs.version }}
 
-      - uses: actions/setup-go@v5
+      - uses: actions/setup-go@v6
         with:
           go-version-file: go.mod
 
@@ -81,14 +81,14 @@ jobs:
 
       - name: Upload artifact (unix)
         if: matrix.goos != 'windows'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: brush-${{ matrix.goos }}-${{ matrix.goarch }}
           path: brush-${{ matrix.goos }}-${{ matrix.goarch }}.tar.gz
 
       - name: Upload artifact (windows)
         if: matrix.goos == 'windows'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: brush-${{ matrix.goos }}-${{ matrix.goarch }}
           path: brush-${{ matrix.goos }}-${{ matrix.goarch }}.zip
@@ -98,7 +98,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download all artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           path: artifacts
 
